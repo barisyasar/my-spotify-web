@@ -3,8 +3,12 @@ import { Container,Typography } from '@mui/material'
 import CardContent from '@mui/material/CardContent';
 import { IconButton } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { useLocation } from 'react-router-dom';
 
 export default function Detail() {
+  const location = useLocation();
+  const music = location.state;
+  
   return (
     <Container>
       <div className="card">
@@ -15,20 +19,22 @@ export default function Detail() {
         <div style={{textAlign:'center'}}>
           spotify player
         </div>
-        <CardContent >
+        <CardContent style={{display:'flex', justifyContent:'center'}}>
+          <div >
           <div style={{display:'flex'}}>
-          <Typography gutterBottom variant="h5" sx={{ flexGrow: 1 }}>
-            Song Name
+          <Typography gutterBottom variant="h5" >
+            {music.name}
           </Typography>
-
-          <IconButton aria-label="bookmark" >
+          <IconButton aria-label="bookmark" style={{alignSelf:'center'}}>
             <BookmarkIcon />
           </IconButton>
           </div>
-          
           <Typography variant="body2" color="text.secondary">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, facere officia repudiandae quae saepe necessitatibus accusamus. Accusantium fuga, sint repellendus facere, officia quibusdam dignissimos vel hic laborum laboriosam perspiciatis vitae?
+            {music.group}
           </Typography>
+          </div>
+
+
         </CardContent>
       </div>
     </Container>

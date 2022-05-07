@@ -2,8 +2,9 @@ import React from 'react';
 import { Container, Typography } from '@mui/material';
 import ListItem from '../components/ListItem';
 import Masonry from 'react-masonry-css'
+import Header from '../components/Header';
 
-export default function Home() {
+export default function Home(accesToken) {
 
   const breakpoints = {
     default: 3,
@@ -13,7 +14,7 @@ export default function Home() {
   
   let musics = [
     {id:1,name:'heloo',group:'justin'},
-    {id:2,name:'one kiss',group:'justin'},
+    {id:2,name:'one kiss',group:'ronaldo'},
     {id:3,name:'love me harder',group:'ariana grande'},
     {id:4,name:'moonlight',group:'xxtention'},
     {id:5,name:'imdat ipmdat',group:'cakakl'},
@@ -30,6 +31,8 @@ export default function Home() {
   })
 
   return (
+   <div>
+      <Header/>
    <Container >
        <Typography margin={1} variant="h4" component="h3">My Songs</Typography>
        <Masonry
@@ -40,5 +43,6 @@ export default function Home() {
       </Masonry>
 
    </Container>
+   </div>
   )
 }

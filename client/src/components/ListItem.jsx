@@ -6,10 +6,12 @@ import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { Link } from "react-router-dom";
 
 export default function ListItem({music}) {
   return (
-    <Card className='songCard'>
+    <Link to= "/detail" state={music} >
+    <Card className='songCard' onClick={()=> console.log('!hey')}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -26,7 +28,7 @@ export default function ListItem({music}) {
            <PlayArrowIcon />
         </IconButton>
         <IconButton aria-label="bookmark" >
-           <BookmarkIcon color='success' />
+           <BookmarkIcon color='secondary' />
         </IconButton>
         </div>
         
@@ -35,5 +37,6 @@ export default function ListItem({music}) {
         </Typography>
       </CardContent>
     </Card>
+    </Link>
   );
 }

@@ -1,4 +1,5 @@
 .main {
+  height: 100vh;
   background: #f9f9f9;
 }
 .card {
@@ -30,3 +31,7 @@
 /* .songCard {
   background-color: aqua !important;
 } */
+
+a:link {
+  text-decoration: none;
+}
