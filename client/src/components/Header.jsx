@@ -14,9 +14,9 @@ const spotifyApi = new SpotifyWebApi({
 }
 )
 
-export default function Header(code) {
+export default function Header() {
 
-  const accessToken = useAuth(code)
+  const accessToken = useAuth()
 
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -30,7 +30,7 @@ export default function Header(code) {
     if(!accessToken) return 
     
     spotifyApi.searchTracks(search).then(res => {
-      console.log(res);
+      console.log(res.body);
     }).catch(e=> console.log(e))
   }, [search,accessToken])
   

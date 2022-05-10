@@ -4,8 +4,7 @@ import ListItem from '../components/ListItem';
 import Masonry from 'react-masonry-css'
 import Header from '../components/Header';
 
-export default function Home(code) {
-
+export default function Home() {
   const breakpoints = {
     default: 3,
     1100: 3,
@@ -32,7 +31,7 @@ export default function Home(code) {
 
   return (
    <div>
-      <Header code={code}/>
+      <Header/>
    <Container >
        <Typography margin={1} variant="h4" component="h3">My Songs</Typography>
        <Masonry
