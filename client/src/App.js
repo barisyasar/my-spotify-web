@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className='main'>
-        {code ? <Home /> : <Login />}
+        {code ? <Home code={code} /> : <Login />}
       </div>
     </ThemeProvider>
   );

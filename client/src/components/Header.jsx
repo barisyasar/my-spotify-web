@@ -14,9 +14,9 @@ const spotifyApi = new SpotifyWebApi({
 }
 )
 
-export default function Header() {
+export default function Header({code}) {
 
-  const accessToken = useAuth()
+  const accessToken = useAuth(code)
 
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
