@@ -7,13 +7,17 @@ import TextField from '@mui/material/TextField';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node'
+import useAuth from '../api/useAuth';
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: '975b05a1870648ecb7680a7e395a6bb2',
+  clientId: 'ca78626eb1704944b58fbc45d014fd85',
 }
 )
 
-export default function Header(accessToken) {
+export default function Header(code) {
+
+  const accessToken = useAuth(code)
+
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
@@ -35,7 +39,7 @@ export default function Header(accessToken) {
     <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Toolbar>
-        <Link to="/home" style={{ display:'flex',flexGrow: 1,textDecoration:'none', color:'black' }}>
+        <Link to="/" style={{ display:'flex',flexGrow: 1,textDecoration:'none', color:'black' }}>
           <Typography variant="h6">
             My Spotify
           </Typography>

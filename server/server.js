@@ -14,8 +14,8 @@ app.post("/refresh", (req, res) => {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
         redirectUri: 'http://localhost:3000',
-        clientId: '975b05a1870648ecb7680a7e395a6bb2',
-        clientSecret: 'd3a30db0a95042809369df0f379cc9f8',
+        clientId: 'ca78626eb1704944b58fbc45d014fd85',
+        clientSecret: '06e47aa0a349404e83d2dda441150de9',
         refreshToken,
     })
 
@@ -23,8 +23,8 @@ app.post("/refresh", (req, res) => {
         .refreshAccessToken()
         .then(data => {
             res.json({
-                accessToken: data.body.accessToken,
-                expiresIn: data.body.expiresIn,
+                accessToken: data.body.access_token,
+                expiresIn: data.body.expires_in,
             })
             // console.log(data.body);
         })
@@ -39,8 +39,8 @@ app.post('/login', (req, res) => {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
         redirectUri: 'http://localhost:3000',
-        clientId: '975b05a1870648ecb7680a7e395a6bb2',
-        clientSecret: 'd3a30db0a95042809369df0f379cc9f8',
+        clientId: 'ca78626eb1704944b58fbc45d014fd85',
+        clientSecret: '06e47aa0a349404e83d2dda441150de9',
     })
 
     spotifyApi
@@ -54,7 +54,6 @@ app.post('/login', (req, res) => {
 
         })
         .catch(err => {
-            console.log('hey1');
             console.log(err);
             res.sendStatus(400)
         })
