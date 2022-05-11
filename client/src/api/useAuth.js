@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function useAuth(code) {
-    console.log(code)
     const [accessToken, setAccessToken] = useState();
     const [refreshToken, setRefreshToken] = useState()
     const [expiresIn, setExpiresIn] = useState()
@@ -13,13 +12,12 @@ export default function useAuth(code) {
                 code,
             })
             .then(res => {
-                console.log(res)
                 setAccessToken(res.data.accessToken);
                 setRefreshToken(res.data.refreshToken)
                 setExpiresIn(res.data.expiresIn)
             })
             .catch(() => {
-                // window.location = '/'
+                window.location = '/'
             })
     }, [code])
 
