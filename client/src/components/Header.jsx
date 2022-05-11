@@ -4,15 +4,19 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node'
 import useAuth from '../api/useAuth';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: 'ca78626eb1704944b58fbc45d014fd85',
-}
-)
+})
 
 export default function Header({code}) {
 
@@ -20,20 +24,43 @@ export default function Header({code}) {
 
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+
   useEffect(() => {
     if(!accessToken) return
     spotifyApi.setAccessToken(accessToken)
   }, [accessToken])
 
   useEffect(() => {
-    if(!search) return setSearchResults([])
-    if(!accessToken) return 
-    
+    if (!search) return setSearchResults([])
+    if (!accessToken) return
+
+    let cancel = false
     spotifyApi.searchTracks(search).then(res => {
-      console.log(res.body);
-    }).catch(e=> console.log(e))
-  }, [search,accessToken])
+      if (cancel) return
+      setSearchResults(
+        res.body.tracks.items.map((track,i) => {
+          const smallestAlbumImage = track.album.images.reduce(
+            (smallest, image) => {
+              if (image.height < smallest.height) return image
+              return smallest
+            },
+            track.album.images[0]
+          )
+
+          return {
+            title: track.name,
+            artist: track.artists[0].name,
+            albumUrl: smallestAlbumImage.url,
+            uri: track.uri,
+          }
+        })
+      )
+    })
+
+    return () => (cancel = true)
+  }, [search, accessToken])
   
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -44,7 +71,50 @@ export default function Header({code}) {
             My Spotify
           </Typography>
         </Link>
-        <TextField id="standard-basic" onChange={e => setSearch(e.target.value)} label="Search" size='small' variant="outlined" color='secondary' />
+        <Autocomplete
+        disableClearable
+        freeSolo
+        loading
+        options={searchResults}
+        getOptionLabel={option => `${option.title},${option.artist},${option.albumUrl},${option.uri} `}
+        renderOption={option => {
+          let tempOption = option.key.split(',');
+
+          return (
+            <ListItem alignItems="flex-start" key={option.id} onClick={() => console.log('hey')}>
+            <ListItemAvatar>
+              <Avatar src={tempOption[2]} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={tempOption[0]}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: 'inline' }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {tempOption[1]}
+                  </Typography>
+                </React.Fragment>
+              }
+            />
+          </ListItem>)
+        }}
+        renderInput={(params) => (
+          <TextField
+          style={{ minWidth: 230 }}
+            {...params}
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+            id="standard-basic" onChange={e => setSearch(e.target.value)} label="Search" size='small' variant="outlined" color='secondary' 
+          />
+        )}
+      />
+        
       </Toolbar>
     </AppBar>
   </Box>
