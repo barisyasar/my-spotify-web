@@ -13,14 +13,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: 'ca78626eb1704944b58fbc45d014fd85',
 })
 
 export default function Header({code}) {
-
   const accessToken = useAuth(code)
+  const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -76,17 +77,23 @@ export default function Header({code}) {
         freeSolo
         loading
         options={searchResults}
-        getOptionLabel={option => `${option.title},${option.artist},${option.albumUrl},${option.uri} `}
+        getOptionLabel={option => `${option.title},${option.artist},${option.albumUrl},${option.uri}`}
         renderOption={option => {
           let tempOption = option.key.split(',');
+          let objeOoption = {
+            title: tempOption[0],
+            artist: tempOption[1],
+            albumUrl: tempOption[2],
+            uri: tempOption[3],
+          }
 
           return (
-            <ListItem alignItems="flex-start" key={option.id} onClick={() => console.log('hey')}>
+            <ListItem alignItems="flex-start" key={option.id} onClick={() => navigate('/detail', {state:{objeOoption,accessToken}})}>
             <ListItemAvatar>
-              <Avatar src={tempOption[2]} />
+              <Avatar src={objeOoption.albumUrl} />
             </ListItemAvatar>
             <ListItemText
-              primary={tempOption[0]}
+              primary={objeOoption.title}
               secondary={
                 <React.Fragment>
                   <Typography
@@ -95,7 +102,7 @@ export default function Header({code}) {
                     variant="body2"
                     color="text.primary"
                   >
-                    {tempOption[1]}
+                    {objeOoption.artist}
                   </Typography>
                 </React.Fragment>
               }

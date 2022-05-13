@@ -4,7 +4,9 @@ import ListItem from '../components/ListItem';
 import Masonry from 'react-masonry-css'
 import Header from '../components/Header';
 
-export default function Home({code}) {
+export default function Home() {
+  const code = new URLSearchParams(window.location.search).get('code')
+  
   const breakpoints = {
     default: 3,
     1100: 3,
@@ -31,17 +33,17 @@ export default function Home({code}) {
 
   return (
    <div>
-      <Header code={code}/>
-   <Container >
-       <Typography margin={1} variant="h4" component="h3">My Songs</Typography>
-       <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column">
-        {musics}
-      </Masonry>
+    <Header code={code}/>
+    <Container >
+        <Typography margin={1} variant="h4" component="h3">My Songs</Typography>
+        <Masonry
+          breakpointCols={breakpoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column">
+          {musics}
+        </Masonry>
 
-   </Container>
+    </Container>
    </div>
   )
 }

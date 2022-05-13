@@ -3,17 +3,21 @@ import { Container,Typography } from '@mui/material'
 import CardContent from '@mui/material/CardContent';
 import { IconButton } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import Player from '../components/Player';
 
 export default function Detail() {
+
   const location = useLocation();
-  const music = location.state;
-  
+  console.log(location.state.objeOoption)
+
+  const music = location.state.objeOoption
+
   return (
     <Container>
       <div className="card">
         <div style={{display:'flex',justifyContent:'center'}}>
-          <img className='imgDetail' src={require('../components/iu.jpeg')} alt='dsfdas' />
+          <img className='imgDetail' src={music.albumUrl} alt='dsfdas' />
         </div>
         <br />
         <div style={{textAlign:'center'}}>
@@ -23,19 +27,18 @@ export default function Detail() {
           <div >
           <div style={{display:'flex'}}>
           <Typography gutterBottom variant="h5" >
-            {music.name}
+            {music.title}
           </Typography>
           <IconButton aria-label="bookmark" style={{alignSelf:'center'}}>
             <BookmarkIcon />
           </IconButton>
           </div>
           <Typography variant="body2" color="text.secondary">
-            {music.group}
+          {music.artist}
           </Typography>
           </div>
-
-
         </CardContent>
+        <Player accessToken={location.state.accessToken} trackUri={music.uri}/>
       </div>
     </Container>
   )
