@@ -7,15 +7,12 @@ import { useLocation } from "react-router-dom";
 import Player from '../components/Player';
 
 export default function Detail() {
-
   const location = useLocation();
-  console.log(location.state.objeOoption)
-
-  const music = location.state.objeOoption
+  const music = location.state.music
 
   return (
-    <Container>
-      <div className="card">
+    <Container style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100vh'}}>
+      <div className="card" >
         <div style={{display:'flex',justifyContent:'center'}}>
           <img className='imgDetail' src={music.albumUrl} alt='dsfdas' />
         </div>

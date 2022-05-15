@@ -39,7 +39,7 @@ export default function Header({code}) {
     spotifyApi.searchTracks(search).then(res => {
       if (cancel) return
       setSearchResults(
-        res.body.tracks.items.map((track,i) => {
+        res.body.tracks.items.map(track => {
           const smallestAlbumImage = track.album.images.reduce(
             (smallest, image) => {
               if (image.height < smallest.height) return image
@@ -80,7 +80,7 @@ export default function Header({code}) {
         getOptionLabel={option => `${option.title},${option.artist},${option.albumUrl},${option.uri}`}
         renderOption={option => {
           let tempOption = option.key.split(',');
-          let objeOoption = {
+          let music = {
             title: tempOption[0],
             artist: tempOption[1],
             albumUrl: tempOption[2],
@@ -88,12 +88,12 @@ export default function Header({code}) {
           }
 
           return (
-            <ListItem alignItems="flex-start" key={option.id} onClick={() => navigate('/detail', {state:{objeOoption,accessToken}})}>
+            <ListItem alignItems="flex-start" key={option.id} onClick={() => navigate('/detail', {state:{music,accessToken}})}>
             <ListItemAvatar>
-              <Avatar src={objeOoption.albumUrl} />
+              <Avatar src={music.albumUrl} />
             </ListItemAvatar>
             <ListItemText
-              primary={objeOoption.title}
+              primary={music.title}
               secondary={
                 <React.Fragment>
                   <Typography
@@ -102,7 +102,7 @@ export default function Header({code}) {
                     variant="body2"
                     color="text.primary"
                   >
-                    {objeOoption.artist}
+                    {music.artist}
                   </Typography>
                 </React.Fragment>
               }

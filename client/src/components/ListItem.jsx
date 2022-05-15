@@ -6,22 +6,21 @@ import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-export default function ListItem({music}) {
+export default function ListItem({music,accessToken}) {
+  const navigate = useNavigate();
   return (
-    <Link to= "/detail" state={music} >
-    <Card className='songCard' onClick={()=> console.log('!hey')}>
+
+    <Card className='songCard' onClick={() => navigate('/detail', {state:{music,accessToken}})}>
       <CardMedia
         component="img"
-        alt="green iguana"
-        height="140"
-        image={require('./iu.jpeg')} 
+        image={music.albumUrl} 
       />
       <CardContent >
         <div style={{display:'flex'}}>
-        <Typography gutterBottom variant="h5" sx={{ flexGrow: 1 }}>
-          {music.name}
+        <Typography gutterBottom variant="h5" sx={{ flexGrow: 1 }} style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
+          {music.title}
         </Typography>
 
         <IconButton aria-label="play/pause" >
@@ -33,10 +32,10 @@ export default function ListItem({music}) {
         </div>
         
         <Typography variant="body2" color="text.secondary">
-          {music.group}
+          {music.artist}
         </Typography>
       </CardContent>
     </Card>
-    </Link>
+
   );
 }

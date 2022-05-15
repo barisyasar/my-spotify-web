@@ -29,16 +29,13 @@ app.post("/refresh", (req, res) => {
             // console.log(data.body);
         })
         .catch(err => {
-            console.log('hey');
             console.log(err)
             res.sendStatus(400)
         })
 })
 
 app.post('/login', (req, res) => {
-
     const code = req.body.code
-    console.log(code);
     const spotifyApi = new SpotifyWebApi({
         redirectUri: 'http://localhost:3000/home/',
         clientId: 'ca78626eb1704944b58fbc45d014fd85',
