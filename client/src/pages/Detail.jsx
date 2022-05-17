@@ -1,42 +1,41 @@
 import React from 'react'
 import { Container,Typography } from '@mui/material'
 import CardContent from '@mui/material/CardContent';
-import { IconButton } from '@mui/material';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import { useLocation } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { useLocation } from "react-router-dom";
+import Header from '../components/Header';
 
 export default function Detail() {
   const location = useLocation();
-  const music = location.state;
-  
+  const music = location.state.music
+
   return (
-    <Container>
+    <div>
+    <Header accessToken={location.state.accessToken} />
+    <Container style={{display:'flex',justifyContent:'center',alignItems:'center',textAlign:'center',height:'90vh'}}>
       <div className="card">
         <div style={{display:'flex',justifyContent:'center'}}>
-          <img className='imgDetail' src={require('../components/iu.jpeg')} alt='dsfdas' />
+          <img className='imgDetail' src={music.albumUrl} alt='dsfdas' />
         </div>
         <br />
-        <div style={{textAlign:'center'}}>
-          spotify player
+        <div>
+          My Spotify Player
         </div>
-        <CardContent style={{display:'flex', justifyContent:'center'}}>
-          <div >
-          <div style={{display:'flex'}}>
+        <CardContent >
           <Typography gutterBottom variant="h5" >
-            {music.name}
+            {music.title}
           </Typography>
-          <IconButton aria-label="bookmark" style={{alignSelf:'center'}}>
-            <BookmarkIcon />
-          </IconButton>
-          </div>
-          <Typography variant="body2" color="text.secondary">
-            {music.group}
+          <Typography variant="body2" color="text.secondary" >
+            {music.artist}
           </Typography>
-          </div>
-
+          <br />
+          <Button variant="outlined" color="blackx">Save Audio</Button>
 
         </CardContent>
+        {/* <Player accessToken={location.state.accessToken} trackUri={music.uri}/> */}
       </div>
     </Container>
+    </div>
+    
   )
 }
