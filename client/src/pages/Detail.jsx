@@ -19,7 +19,7 @@ export default function Detail() {
         </div>
         <br />
         <div>
-          Spotify player
+          My Spotify Player
         </div>
         <CardContent >
           <Typography gutterBottom variant="h5" >

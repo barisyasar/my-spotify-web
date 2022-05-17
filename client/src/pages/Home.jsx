@@ -5,10 +5,10 @@ import Masonry from 'react-masonry-css'
 import Header from '../components/Header';
 import useAuth from '../api/useAuth';
 import { useState, useEffect } from 'react';
-import { spotifyApi } from '../api/SpotifyApi';
+import { spotifyApi, code} from '../api/SpotifyApi';
 
 export default function Home() {
-  const code = new URLSearchParams(window.location.search).get('code')
+  
   const [musics, setMusics] = useState([]);
   const accessToken = useAuth(code)
 
