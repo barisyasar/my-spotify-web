@@ -3,14 +3,9 @@ import { Container, Typography } from '@mui/material';
 import ListItem from '../components/ListItem';
 import Masonry from 'react-masonry-css'
 import Header from '../components/Header';
-import SpotifyWebApi from 'spotify-web-api-node';
 import useAuth from '../api/useAuth';
 import { useState, useEffect } from 'react';
-
-
-const spotifyApi = new SpotifyWebApi({
-  clientId: 'ca78626eb1704944b58fbc45d014fd85',
-})
+import { spotifyApi } from '../api/SpotifyApi';
 
 export default function Home() {
   const code = new URLSearchParams(window.location.search).get('code')
@@ -30,13 +25,11 @@ export default function Home() {
 
   useEffect(() => {
     if (!accessToken) return
-    // let cancel = false
     spotifyApi.getPlaylistTracks('5X2Bw74MKsRMQ7CtuHhmQF', {
       offset: 1,
       limit: 10,
       fields: 'items'
     }).then(res => {
-      // console.log(res.body.items[0].track);
       setMusics(
         res.body.items.map((item,i) => {
           return {
@@ -49,13 +42,11 @@ export default function Home() {
         })
       )
     })
-
-    // return () => (cancel = true)
   }, [accessToken])
 
   return (
    <div>
-    <Header code={code}/>
+    <Header accessToken={accessToken}/>
     <Container >
         <Typography  variant="h4" component="h3">My Songs</Typography>
         <Masonry

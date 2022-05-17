@@ -7,22 +7,15 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import SpotifyWebApi from 'spotify-web-api-node'
-import useAuth from '../api/useAuth';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
+import { spotifyApi } from '../api/SpotifyApi';
 
-const spotifyApi = new SpotifyWebApi({
-  clientId: 'ca78626eb1704944b58fbc45d014fd85',
-})
-
-export default function Header({code}) {
-  const accessToken = useAuth(code)
+export default function Header({accessToken}) {
   const navigate = useNavigate();
-
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -42,7 +35,7 @@ export default function Header({code}) {
         res.body.tracks.items.map(track => {
           const smallestAlbumImage = track.album.images.reduce(
             (smallest, image) => {
-              if (image.height < smallest.height) return image
+              if (image.height > smallest.height) return image
               return smallest
             },
             track.album.images[0]
