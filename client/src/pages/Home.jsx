@@ -15,7 +15,7 @@ export default function Home() {
   const breakpoints = {
     default: 3,
     1100: 2,
-    700: 1,
+    700: 2,
   };
 
   useEffect(() => {
@@ -47,8 +47,9 @@ export default function Home() {
   return (
    <div>
     <Header accessToken={accessToken}/>
-    <Container >
-        <Typography  variant="h4" component="h3">My Songs</Typography>
+    <Container style={{marginTop:'65px'}}>
+        <Typography variant="h4" component="h3">My Songs</Typography>
+        <br />
         <Masonry
           breakpointCols={breakpoints}
           className="my-masonry-grid"

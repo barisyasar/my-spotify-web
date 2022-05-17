@@ -15,9 +15,6 @@ function App() {
         <Route path='/home/' element={<Home />} />
         <Route path="/detail/" element={<Detail />} />
       </Routes>
-      {/* <div className='main'>
-        {code ? <Home code={code} /> : <Login />}
-      </div> */}
     </ThemeProvider>
   );
 }
