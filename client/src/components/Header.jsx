@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Link } from "react-router-dom";
-<<<<<<< Updated upstream
 import { useState, useEffect } from 'react';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -13,22 +12,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { useNavigate } from 'react-router-dom';
 import { spotifyApi } from '../api/SpotifyApi';
-=======
-import { useState } from 'react';
-
-
-
-
-export default function Header() {
-
->>>>>>> Stashed changes
 
 export default function Header({accessToken}) {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-<<<<<<< Updated upstream
-
   useEffect(() => {
     if(!accessToken) return
     spotifyApi.setAccessToken(accessToken)
@@ -63,9 +51,6 @@ export default function Header({accessToken}) {
 
     return () => (cancel = true)
   }, [search, accessToken])
-=======
->>>>>>> Stashed changes
-  
 
 
   return (

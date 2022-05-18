@@ -7,17 +7,13 @@ import useAuth from '../api/useAuth';
 import { useState, useEffect } from 'react';
 import { spotifyApi, code} from '../api/SpotifyApi';
 
-export default function Home() {
-<<<<<<< Updated upstream
-  
+export default function Home() {  
   const [musics, setMusics] = useState([]);
   const accessToken = useAuth(code)
-=======
->>>>>>> Stashed changes
 
   const breakpoints = {
     default: 3,
-    1100: 2,
+    1100: 4,
     700: 2,
   };
 
@@ -49,7 +45,6 @@ export default function Home() {
 
   return (
    <div>
-<<<<<<< Updated upstream
     <Header accessToken={accessToken}/>
     <Container style={{marginTop:'65px'}}>
         <Typography variant="h4" component="h3">My Songs</Typography>
@@ -66,18 +61,6 @@ export default function Home() {
           )
         })}
         </Masonry>
-=======
-      <Header />
-   <Container >
-       <Typography margin={1} variant="h4" component="h3">My Songs</Typography>
-       <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column">
-        {musics}
-      </Masonry>
->>>>>>> Stashed changes
-
     </Container>
    </div>
   )
