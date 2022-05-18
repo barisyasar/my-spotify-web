@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useNavigate } from 'react-router-dom';
 
 export default function ListItem({music,accessToken}) {
@@ -22,12 +21,8 @@ export default function ListItem({music,accessToken}) {
         <Typography gutterBottom variant="h5" sx={{ flexGrow: 1 }} style={{whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
           {music.title}
         </Typography>
-
         <IconButton aria-label="play/pause" >
            <PlayArrowIcon />
-        </IconButton>
-        <IconButton aria-label="bookmark" >
-           <BookmarkIcon color='secondary' />
         </IconButton>
         </div>
         

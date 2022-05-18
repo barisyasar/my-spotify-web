@@ -2,25 +2,23 @@
   height: 100vh;
   background: #f9f9f9;
 }
-.card {
-  margin: 10px;
-}
 
 .imgDetail {
   width: 250px;
   height: 250px;
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 .my-masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
-  margin-left: -30px; /* gutter size offset */
+
   width: auto;
 }
 .my-masonry-grid_column {
-  padding-left: 30px; /* gutter size */
+  margin-left: 5px;
+  margin-right: 5px;
   background-clip: padding-box;
 }
 
