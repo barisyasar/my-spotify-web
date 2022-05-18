@@ -6,7 +6,9 @@ if(!accessToken) return null
   return (
     <SpotifyPlayer
     token={accessToken}
-    showSaveIcon
+    styles={{
+      trackArtistColor:'none'
+    }}
     uris={trackUri? [trackUri]:[]}/>
   )
 }
