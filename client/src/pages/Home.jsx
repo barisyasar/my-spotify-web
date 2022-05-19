@@ -24,7 +24,8 @@ export default function Home() {
 
   useEffect(() => {
     if (!accessToken) return
-    spotifyApi.getPlaylistTracks('5X2Bw74MKsRMQ7CtuHhmQF', {
+    // Write the username that you want to get playlist
+    spotifyApi.getPlaylistTracks('USER_ID', {
       offset: 1,
       limit: 10,
       fields: 'items'
